@@ -1,0 +1,24 @@
+[submodule "third_party/libigl"]
+	path = third_party/libigl
+	url = https://github.com/qnzhou/libigl.git
+[submodule "third_party/carve"]
+	path = third_party/carve
+	url = https://github.com/qnzhou/carve.git
+[submodule "third_party/cork"]
+	path = third_party/cork
+	url = https://github.com/qnzhou/cork.git
+[submodule "third_party/tetgen"]
+	path = third_party/tetgen
+	url = https://github.com/qnzhou/tetgen.git
+[submodule "third_party/triangle"]
+	path = third_party/triangle
+	url = https://github.com/qnzhou/triangle.git
+[submodule "third_party/qhull"]
+	path = third_party/qhull
+	url = https://github.com/qnzhou/qhull.git
+[submodule "third_party/Clipper"]
+	path = third_party/Clipper
+	url = https://github.com/qnzhou/Clipper.git
+[submodule "third_party/eigen"]
+	path = third_party/eigen
+	url = https://github.com/qnzhou/eigen.git

@@ -1,0 +1,10 @@
+%module PyMesh
+%include Core/ExceptionConverter.i
+%include numpy_setup.i
+%include Core/EigenTypedef.i
+%include eigen.i
+%include Mesh.i
+%include MeshFactory.i
+%include IO/MeshWriter.i
+%include Misc/HashGrid.i
+%include Math/ZSparseMatrix.i

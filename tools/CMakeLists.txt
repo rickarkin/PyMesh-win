@@ -1,0 +1,119 @@
+# Eigen
+INCLUDE_DIRECTORIES(${EIGEN_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(${EIGEN_INCLUDE_DIRS}/unsupported)
+ADD_DEFINITIONS(-DEIGEN_YES_I_KNOW_SPARSE_MODULE_IS_NOT_STABLE_YET)
+
+# Include headers
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/tools)
+
+# Add swig wrapper for the library
+INCLUDE(UseSWIG)
+
+# python
+INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_PATH})
+
+# Find numpy
+INCLUDE_DIRECTORIES(${NUMPY_INCLUDE_DIRS})
+
+# Add eigen wrapper
+INCLUDE_DIRECTORIES(${EIGEN_WRAPPER_PATH})
+
+SET(TARGET_MODULES "")
+
+ADD_SUBDIRECTORY(Predicates)
+LIST(APPEND TARGET_MODULES predicates)
+
+ADD_SUBDIRECTORY(MeshUtils)
+LIST(APPEND TARGET_MODULES MeshUtils)
+
+ADD_SUBDIRECTORY(Assembler)
+LIST(APPEND TARGET_MODULES assembler)
+
+ADD_SUBDIRECTORY(ConvexHull)
+LIST(APPEND TARGET_MODULES convex_hull)
+
+ADD_SUBDIRECTORY(EigenUtils)
+LIST(APPEND TARGET_MODULES EigenUtils)
+
+ADD_SUBDIRECTORY(Envelope)
+LIST(APPEND TARGET_MODULES envelope)
+
+ADD_SUBDIRECTORY(Boolean)
+LIST(APPEND TARGET_MODULES boolean)
+
+ADD_SUBDIRECTORY(SelfIntersection)
+LIST(APPEND TARGET_MODULES self_intersection)
+
+ADD_SUBDIRECTORY(OuterHull)
+LIST(APPEND TARGET_MODULES outer_hull)
+
+ADD_SUBDIRECTORY(WindingNumber)
+LIST(APPEND TARGET_MODULES winding_number)
+
+IF (CGAL_FOUND)
+    ADD_SUBDIRECTORY(CGAL)
+    LIST(APPEND TARGET_MODULES cgal)
+ELSE (CGAL_FOUND)
+    MESSAGE(WARNING "CGAL wrapper module is not built because CGAL lib is missing")
+ENDIF (CGAL_FOUND)
+
+IF (TETGEN_FOUND)
+    ADD_SUBDIRECTORY(tetgen)
+    LIST(APPEND TARGET_MODULES tetgen)
+ELSE (TETGEN_FOUND)
+    MESSAGE(WARNING "Tetgen wrapper module is not built because tetgen lib is missing")
+ENDIF (TETGEN_FOUND)
+
+IF (CGAL_FOUND)
+    ADD_SUBDIRECTORY(Tetrahedronization)
+    LIST(APPEND TARGET_MODULES tetrahedronization)
+ELSE (CGAL_FOUND)
+    MESSAGE(WARNING "Tetrahedronization module is not built because CGAL is missing")
+ENDIF (CGAL_FOUND)
+
+IF (TRIANGLE_FOUND)
+    ADD_SUBDIRECTORY(triangle)
+    LIST(APPEND TARGET_MODULES triangle)
+ELSE (TRIANGLE_FOUND)
+    MESSAGE(WARNING "Triangle wrapper module is not built because triangle lib is missing")
+ENDIF (TRIANGLE_FOUND)
+
+IF (OPENCL_FOUND)
+    ADD_SUBDIRECTORY(OpenCL)
+    LIST(APPEND TARGET_MODULES opencl_wrapper)
+ELSE (OPENCL_FOUND)
+    MESSAGE(WARNING "OpenCL wrapper module is not built because OpenCL is missing")
+ENDIF (OPENCL_FOUND)
+
+IF (UMFPACK_FOUND AND CHOLMOD_FOUND AND METIS_FOUND)
+    ADD_SUBDIRECTORY(SparseSolver)
+    LIST(APPEND TARGET_MODULES SparseSolver)
+ELSEIF (NOT UMFPACK_FOUND)
+    MESSAGE(WARNING "SparseSolver module is not built because Umfpack is missing")
+ELSEIF (NOT CHOLMOD_FOUND)
+    MESSAGE(WARNING "SparseSolver module is not built because Cholmod is missing")
+ELSEIF (NOT METIS_FOUND)
+    MESSAGE(WARNING "SparseSolver module is not built because Metis is missing")
+ENDIF (UMFPACK_FOUND AND CHOLMOD_FOUND AND METIS_FOUND)
+
+IF (CGAL_FOUND AND CORK_FOUND AND TETGEN_FOUND AND TRIANGLE_FOUND)
+    ADD_SUBDIRECTORY(Wires)
+    LIST(APPEND TARGET_MODULES wires)
+ELSEIF (NOT CGAL_FOUND)
+    MESSAGE(WARNING "Wires module is not built because CGAL is missing")
+ELSEIF (NOT CORK_FOUND)
+    MESSAGE(WARNING "Wires module is not built because cork is missing")
+ELSEIF (NOT TETGEN_FOUND)
+    MESSAGE(WARNING "Wires module is not built because tetgen is missing")
+ELSEIF (NOT TRIANGLE_FOUND)
+    MESSAGE(WARNING "Wires module is not built because triangle is missing")
+ENDIF (CGAL_FOUND AND CORK_FOUND AND TETGEN_FOUND AND TRIANGLE_FOUND)
+
+IF (CGAL_FOUND AND LIBIGL_FOUND)
+    ADD_SUBDIRECTORY(IGL)
+    LIST(APPEND TARGET_MODULES igl)
+ENDIF (CGAL_FOUND AND LIBIGL_FOUND)
+
+# Bundle all tools together
+ADD_CUSTOM_TARGET(tools DEPENDS ${TARGET_MODULES})
