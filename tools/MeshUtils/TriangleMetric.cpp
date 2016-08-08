@@ -19,6 +19,19 @@ using namespace TriangleMetricHelper;
 const Real TriangleMetric::epsilon = 1e-8;
 bool TriangleMetric::use_lin_canny = true;
 
+void TriangleMetric::setUseLinCanny(bool v) {
+	use_lin_canny = v;
+}
+
+Real TriangleMetric::getClosestPts(Point& p1, Point& p2) {
+	if (TriangleMetric::use_lin_canny) {
+		return runLinCanny(p1, p2);
+	}
+	else {
+		return oldCodeWrapper(p1, p2);
+	}
+}
+
 TriangleMetric::TriangleMetric() {
 	m_ft_types[0] = m_ft_types[1] = VERTEX;
 	m_ft_idx[0] = m_ft_idx[1] = 0;
