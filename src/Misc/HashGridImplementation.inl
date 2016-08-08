@@ -301,7 +301,7 @@ VectorF HashGridImplementation<Trait>::convert_to_grid_point(
 }
 
 template<typename Trait>
-bool HashGridImplementation<Trait>::insert_key(int obj_id, HashGridImplementation<Trait>::HashKey& key) {
+bool HashGridImplementation<Trait>::insert_key(int obj_id, typename HashGridImplementation<Trait>::HashKey& key) {
     typename HashMap::iterator itr = m_hash_map->find(key);
     if (itr == m_hash_map->end()) {
         HashItem item = Trait::get_default_item();

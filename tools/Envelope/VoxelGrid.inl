@@ -282,7 +282,7 @@ void VoxelGrid<DIM>::flood_exterior_cells() {
 }
 
 template<int DIM>
-void VoxelGrid<DIM>::flood_from_base_cell(VoxelGrid<DIM>::Mask& mask) {
+void VoxelGrid<DIM>::flood_from_base_cell(typename VoxelGrid<DIM>::Mask& mask) {
     Vector_f p = mask.base_coordinates();
     assert(this->is_inside(p));
     const Vector_i seed_idx = this->coordinate_to_index(p);

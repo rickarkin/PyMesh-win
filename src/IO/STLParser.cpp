@@ -245,7 +245,7 @@ bool STLParser::parse_binary(const std::string& filename) {
 
     size_t float_size = sizeof(float);
     assert(float_size == 4);
-    size_t LINE_SIZE=256;
+    const size_t LINE_SIZE=256;
     char buf[LINE_SIZE];
 
     // 80 bytes header, no data significance.
