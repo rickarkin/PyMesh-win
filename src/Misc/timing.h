@@ -37,12 +37,23 @@ static double timestamp_diff_in_seconds(timestamp_type start, timestamp_type end
 #else
 
 #include <time.h>
+#include <windows.h>
 
 typedef struct timespec timestamp_type;
 
+int clock_gettime(int, struct timespec *spec)      //C-file part
+{
+	__int64 wintime; 
+	GetSystemTimeAsFileTime((FILETIME*)&wintime);
+	wintime -= 116444736000000000i64;  //1jan1601 to 1jan1970
+	spec->tv_sec = wintime / 10000000i64;           //seconds
+	spec->tv_nsec = wintime % 10000000i64 * 100;      //nano-seconds
+	return 0;
+}
+
 static void get_timestamp(timestamp_type *t)
 {
-  clock_gettime(CLOCK_REALTIME, t);
+  clock_gettime(/*CLOCK_REALTIME*/0, t);
 }
 
 static double timestamp_diff_in_seconds(timestamp_type start, timestamp_type end)

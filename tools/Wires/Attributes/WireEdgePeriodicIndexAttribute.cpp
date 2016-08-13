@@ -22,8 +22,8 @@ namespace WireEdgePeriodicIndexAttributeHelper {
                 Vector2F(bbox_size[0], 0.0),
                 Vector2F(0.0, bbox_size[1])
             };
-            transforms.push_back([=](const VectorF& v) { return v+step[0]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[1]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[0]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[1]; });
         } else if (dim == 3) {
             Vector3F step[] = {
                 Vector3F( bbox_size[0],          0.0,          0.0),
@@ -36,15 +36,15 @@ namespace WireEdgePeriodicIndexAttributeHelper {
                 Vector3F(          0.0,-bbox_size[1], bbox_size[2]),
                 Vector3F(          0.0, bbox_size[1], bbox_size[2])
             };
-            transforms.push_back([=](const VectorF& v) { return v+step[0]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[1]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[2]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[3]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[4]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[5]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[6]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[7]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[8]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[0]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[1]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[2]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[3]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[4]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[5]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[6]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[7]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[8]; });
         } else {
             std::stringstream err_msg;
             err_msg << "Unsupported dimension: " << dim;

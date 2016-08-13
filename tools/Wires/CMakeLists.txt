@@ -28,6 +28,7 @@ ADD_SUBDIRECTORY(Inflator)
 ADD_SUBDIRECTORY(Interfaces)
 ADD_SUBDIRECTORY(Parameters)
 
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 ADD_LIBRARY(lib_wires SHARED ${SRC_FILES} ${INC_FILES})
 TARGET_LINK_LIBRARIES(lib_wires Mesh lib_MeshUtils lib_convex_hull
     lib_triangle_wrapper lib_boolean lib_tetgen_wrapper)

@@ -26,9 +26,9 @@ namespace WireVertexPeriodicIndexAttributeHelper {
                 Vector2F(bbox_size[0], bbox_size[1]),
                 Vector2F(bbox_size[0],-bbox_size[1])
             };
-            transforms.push_back([=](const VectorF& v) { return v+step[0]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[1]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[2]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[0]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[1]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[2]; });
         } else if (dim == 3) {
             Vector3F step[] = {
                 Vector3F( bbox_size[0],          0.0,          0.0),
@@ -45,19 +45,19 @@ namespace WireVertexPeriodicIndexAttributeHelper {
                 Vector3F( bbox_size[0],-bbox_size[1], bbox_size[2]),
                 Vector3F( bbox_size[0], bbox_size[1],-bbox_size[2])
             };
-            transforms.push_back([=](const VectorF& v) { return v+step[0]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[1]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[2]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[3]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[4]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[5]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[6]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[7]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[8]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[9]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[10]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[11]; });
-            transforms.push_back([=](const VectorF& v) { return v+step[12]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[0]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[1]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[2]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[3]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[4]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[5]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[6]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[7]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[8]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[9]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[10]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[11]; });
+            transforms.push_back([&](const VectorF& v) { return v+step[12]; });
         } else {
             std::stringstream err_msg;
             err_msg << "Unsupported dimension: " << dim;
