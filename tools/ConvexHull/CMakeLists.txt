@@ -27,6 +27,7 @@ ELSE (QHULL_FOUND)
     MESSAGE(WARNING "Qhull missing.  Skipping qhull convex hull support")
 ENDIF (QHULL_FOUND)
 
+ADD_DEFINITIONS(-Dqh_QHpointer)
 
 ADD_LIBRARY(lib_convex_hull SHARED ${SRC_FILES} ${INC_FILES})
 TARGET_LINK_LIBRARIES(lib_convex_hull

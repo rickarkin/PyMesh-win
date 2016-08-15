@@ -43,10 +43,14 @@
    错误的工程，在工程设置Linker->All Options->Additional Options里，将X86改为x64
    只要能编译libqhull工程即可
 	生成的libqhull.lib在lib目录下
+	qh_QHpointer
+	
 10.解压sparsehash-master
    将SPARSEHASH_INCLUDE_DIRS设置为sparsehash的路径
    在生成的工程中，增加include路径到sparsehash-master\src\windows
  	
+11.cork
+   新建lib工程，把src目录下除了
 
 PyMesh的编译过程
 1. 下载并安装CTP NOV
