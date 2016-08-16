@@ -1,8 +1,9 @@
-1. 解压缩 PyMesh
+﻿1. 解压缩 PyMesh
    或者用git从https://github.com/qnzhou/PyMesh.git下载
    CMake加载CMakeList.txt
    
 2. 下载anaconda，https://www.continuum.io/downloads
+   注意，一定是 Python 2.7的版本，pymesh对3.x支持有问题
    安装完成后，Python、NumPy、SciPy都会自动安装好。
 	
 3. 下载并解压缩eigen-eigen-b30b87236a1b.tar
