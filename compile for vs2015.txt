@@ -12,7 +12,7 @@
    3.1 	用git导出 PyMesh的依赖文件
 		https://github.com/rickarkin/PyMesh-win-Depends-VS2015.git
 
-   3.2 	编译依赖文件中的一些库
+   3.2 	编译依赖文件中的一些库，都要求生成VS2015 x64版本的
 		包括clipper\cork\qhull-master\tetgen\triangle
 		普遍都是用CMake生成工程，然后编译即可；
 
@@ -32,7 +32,8 @@
 			要求将CGAL_DIR设定为环境变量  
 	   用CMake为CGAL生成工程到/build路径，
 	   
-4. 用CMake生成PyMesh工程，即compile，会有一系列错误，
+4. 用CMake生成PyMesh工程，要求是VS 2015 x64版本的
+   即compile，会有一系列错误，
    普遍是找不到依赖文件的路径
    在CMake的search中挨个找到下面的参数进行设置
        
@@ -47,7 +48,7 @@
 	添加关于TETGEN的路径
 	添加关于Triangle的路径
 
-正常的话，这时已经生成可以正常的generate了
+正常的话，这时已经生成可以正常的generate了，之后直接在VC下编译即可
 
 
 
