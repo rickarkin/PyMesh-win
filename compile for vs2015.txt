@@ -1,68 +1,53 @@
-﻿1. 解压缩 PyMesh
-   或者用git从https://github.com/qnzhou/PyMesh.git下载
-   CMake加载CMakeList.txt
+﻿1. 用git导出 PyMesh
+   https://github.com/rickarkin/PyMesh-win.git
+   CMake加载/CMakeList.txt
    
 2. 下载anaconda，https://www.continuum.io/downloads
    注意，一定是 Python 2.7的版本，pymesh对3.x支持有问题
    安装完成后，Python、NumPy、SciPy都会自动安装好。
+
+
+3. 准备依赖文件和库
+
+   3.1 	用git导出 PyMesh的依赖文件
+		https://github.com/rickarkin/PyMesh-win-Depends-VS2015.git
+
+   3.2 	编译依赖文件中的一些库
+		包括clipper\cork\qhull-master\tetgen\triangle
+		普遍都是用CMake生成工程，然后编译即可；
+
+   3.3 下载并解压缩eigen
+       http://eigen.tuxfamily.org/index.php?title=Main_Page
+	   
+   3.4 下载并解压缩boost
+       http://www.boost.org/
+
+   3.5 下载并解压缩libigl
+       http://libigl.github.io/libigl/
+	   
+   3.6 安装CGAL-4.7
+	   注意安装过程中
+			选中“GMP and MPFR precompiled libs”
+			选择正确的32-bit或者64-bit
+			要求将CGAL_DIR设定为环境变量  
+	   用CMake为CGAL生成工程到/build路径，
+	   
+4. 用CMake生成PyMesh工程，即compile，会有一系列错误，
+   普遍是找不到依赖文件的路径
+   在CMake的search中挨个找到下面的参数进行设置
+       
+	设置Eigen_include_DIR到eigen的根目录
+	设置CGAL_DIR到cgal/build，即前面3.6生成的工程路径，因为要用到其中的CGALConfig.cmake文件
+	设置Boost_INCLUDE_DIR 为boost的路径
+	设置SWIG_EXECUTABLE，即swig.exe的路径
+    添加关于qhull的路径，QHULL_INCLUDE_DIR设置到qhull/src即可，QHULL_LIBRARY则使用qhull-master/build/release/qhullstatic.lib
+	添加关于sparsehash的路径，SPARSEHASH_INCLUDE_DIRS使用sparsehash-master/src/windows
 	
-3. 下载并解压缩eigen-eigen-b30b87236a1b.tar
-   CMake中设置Eigen_include_DIR
-   
-4. 下载并解压缩swigwin，http://www.swig.org/download.html
-   CMake中设置SWIG_EXECUTABLE，即swig.exe的路径
-   
-5. 下载并安装boost_1_60_0
-   CMake中设置 Boost_INCLUDE_DIR 为boost的安装路径，
-   缺省为C:\local\boost_1_60_0
-   
-5. 安装CGAL-4.7
-   注意安装过程中
-		选中“GMP and MPFR precompiled libs”
-		选择正确的32-bit或者64-bit
-		要求将CGAL_DIR设定为环境变量  
-   用CMake为CGAL生成工程到/build路径，该路径设置到pymesh的CMake参数CGAL_DIR中，因为要用到其中的CGALConfig.cmake文件
-   
+	添加关于cork的路径，CORK_INCLUDE_DIRS使用cork/src，CORK_LIBRARIES使用cork/build/Release/cork.lib
+	添加关于TETGEN的路径
+	添加关于Triangle的路径
 
 正常的话，这时已经生成可以正常的generate了
 
 
 
-   
-7. CMake中设置GMP_INCLUDE_DIRS 为 CGAL-4.7\auxiliary\gmp\include
-   CMake中设置GMP_LIBRARIES为 CGAL-4.7\auxiliary\gmp\lib\libgmp-10.lib
-   
-   CMake中设置LIBIGL_INCLUDE_DIRS
-   
-8. 下载tetgen1.5.0
-   生成工程并编译
-   在CMake中添加关于TETGEN的路径
-   
-9。将qhull解压，
-   用vs11打开Build目录下vc8的solution
-   对出现“Error	4	error LNK1112: module machine type 'x64' conflicts with target machine type 'X86'	”
-   错误的工程，在工程设置Linker->All Options->Additional Options里，将X86改为x64
-   只要能编译libqhull工程即可
-	生成的libqhull.lib在lib目录下
-	qh_QHpointer
-	
-10.解压sparsehash-master
-   将SPARSEHASH_INCLUDE_DIRS设置为sparsehash的路径
-   在生成的工程中，增加include路径到sparsehash-master\src\windows
- 	
-11.cork
-   新建lib工程，把src目录下除了
-
-PyMesh的编译过程
-1. 下载并安装CTP NOV
-2. 将工程设置General->Platform Toolset改为用Nov 2012 CTP
-8. STLParser.cpp Ln241，将LINE_SIZE定义为const
-4. HashMapTrait.h Ln99，用0x7fffffff替代max函数
-9. HashGridImplementation.inl Ln302
-   改为 typename HashGridImplementation<Trait>::HashKey
-
-  
-   
-遗留问题
-1. HashMapTrait.h Ln99， static const的定义
-2. 
